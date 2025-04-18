@@ -43,11 +43,11 @@ def setupNode(nodeName,nodeType,ramSize,coreCount):
 for i in range(num_nodes):
   if i == 0:
     node = setupNode("head", params.nodeType, params.ramsize, params.corecount)
+    node.routable_control_ip = "true"
   else:
     node = setupNode("worker-" + str(i), params.nodeType, params.ramsize, params.corecount)
   bs_landing = node.Blockstore("bs_" + str(i), "/image")
-  bs_landing.size = "500GB"
-  node.routable_control_ip = "true" 
+  bs_landing.size = "500GB" 
   node.disk_image = "urn:publicid:IDN+emulab.net+image+emulab-ops:UBUNTU22-64-STD"
   iface = node.addInterface("if" + str(i))
   iface.component_id = "eth1"
